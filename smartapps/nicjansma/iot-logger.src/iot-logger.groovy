@@ -120,7 +120,7 @@ def doSubscriptions() {
     subscribe(switches, "switch", switchHandler)
     subscribe(levels, "level", levelHandler)
     subscribe(temperatures, "temperature", temperatureHandler)
-    subscribe(lux, "illuminance", illuminanceMeasurement)
+    subscribe(lux, "illuminance", illuminanceHandler)
     subscribe(waterdetectors, "water", waterHandler)
     subscribe(location, "location", locationHandler)
     subscribe(accelerations, "acceleration", accelerationHandler)
