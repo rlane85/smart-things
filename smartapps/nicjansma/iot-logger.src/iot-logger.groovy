@@ -47,6 +47,9 @@ preferences {
     section("Log these motion sensors:") {
         input "motions", "capability.motionSensor", multiple: true, required: false
     }
+    section("Log these illuminance sensors:") {
+        input "lux", "capability.illuminanceMeasurement", multiple: true, required: false
+    }
     section("Log these temperature sensors:") {
         input "temperatures", "capability.temperatureMeasurement", multiple: true, required: false
     }
@@ -117,6 +120,7 @@ def doSubscriptions() {
     subscribe(switches, "switch", switchHandler)
     subscribe(levels, "level", levelHandler)
     subscribe(temperatures, "temperature", temperatureHandler)
+    subscribe(lux, "illuminance", illuminanceMeasurement)
     subscribe(waterdetectors, "water", waterHandler)
     subscribe(location, "location", locationHandler)
     subscribe(accelerations, "acceleration", accelerationHandler)
@@ -210,7 +214,9 @@ def contactHandler(evt) {
 def temperatureHandler(evt) {
     genericHandler(evt)
 }
-
+def illuminanceHandler(evt) {
+    genericHandler(evt)
+}
 def motionHandler(evt) {
     genericHandler(evt)
 }
