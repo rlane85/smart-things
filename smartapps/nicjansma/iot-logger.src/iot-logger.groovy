@@ -39,7 +39,7 @@ preferences {
         input "lux", "capability.illuminanceMeasurement", multiple: true, required: false
     }
     section("Log these color values:") {
-        input "color", "capability.colorControl", multiple: true, required: false
+        input "colorValue", "capability.colorControl", multiple: true, required: false
     }
     section("Log these presence sensors:") {
         input "presences", "capability.presenceSensor", multiple: true, required: false
@@ -112,7 +112,7 @@ def initialize() {
 
 def doSubscriptions() {
     subscribe(lux, "illuminance", illuminanceHandler)
-    subscribe(color, "color", colorHandler)
+    subscribe(colorValue, "color", colorHandler)
     subscribe(alarms, "alarm", alarmHandler)
     subscribe(codetectors, "carbonMonoxideDetector", coHandler)
     subscribe(contacts, "contact", contactHandler)
