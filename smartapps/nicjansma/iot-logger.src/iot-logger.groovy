@@ -35,6 +35,12 @@ definition(
     iconX3Url: "http://cdn.device-icons.smartthings.com/Home/home1-icn@3x.png")
 
 preferences {
+    section("Log these illuminance sensors:") {
+        input "lux", "capability.illuminanceMeasurement", multiple: true, required: false
+    }
+    section("Log these color values:") {
+        input "color", "capability.colorControl", multiple: true, required: false
+    }
     section("Log these presence sensors:") {
         input "presences", "capability.presenceSensor", multiple: true, required: false
     }
@@ -46,9 +52,6 @@ preferences {
     }
     section("Log these motion sensors:") {
         input "motions", "capability.motionSensor", multiple: true, required: false
-    }
-    section("Log these illuminance sensors:") {
-        input "lux", "capability.illuminanceMeasurement", multiple: true, required: false
     }
     section("Log these temperature sensors:") {
         input "temperatures", "capability.temperatureMeasurement", multiple: true, required: false
@@ -108,6 +111,8 @@ def initialize() {
 }
 
 def doSubscriptions() {
+    subscribe(lux, "illuminance", illuminanceHandler)
+    subscribe(color, "color", colorHandler)
     subscribe(alarms, "alarm", alarmHandler)
     subscribe(codetectors, "carbonMonoxideDetector", coHandler)
     subscribe(contacts, "contact", contactHandler)
@@ -120,7 +125,6 @@ def doSubscriptions() {
     subscribe(switches, "switch", switchHandler)
     subscribe(levels, "level", levelHandler)
     subscribe(temperatures, "temperature", temperatureHandler)
-    subscribe(lux, "illuminance", illuminanceHandler)
     subscribe(waterdetectors, "water", waterHandler)
     subscribe(location, "location", locationHandler)
     subscribe(accelerations, "acceleration", accelerationHandler)
@@ -179,6 +183,12 @@ def genericHandler(evt) {
     }
 }
 
+def illuminanceHandler(evt) {
+    genericHandler(evt)
+}
+def colorHandler(evt) {
+    genericHandler(evt)
+}
 def alarmHandler(evt) {
     genericHandler(evt)
 }
@@ -214,9 +224,7 @@ def contactHandler(evt) {
 def temperatureHandler(evt) {
     genericHandler(evt)
 }
-def illuminanceHandler(evt) {
-    genericHandler(evt)
-}
+
 def motionHandler(evt) {
     genericHandler(evt)
 }
